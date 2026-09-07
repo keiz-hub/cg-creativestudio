@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CG Creative Studio — Coming Soon</title>
+  <meta name="description" content="CG Creative Studio is giving the site a little makeover. Come back soon for our big reveal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <div class="content">
+
+      <!-- Placeholder for the animated GIF graphic -->
+      <div class="ph ph-gif">
+        <img src="assets/hero.gif" alt="" class="ph-img" onerror="this.style.display='none'; this.parentElement.classList.add('ph-empty')">
+        <span class="ph-label">GIF placeholder<br><small>assets/hero.gif</small></span>
+      </div>
+
+      <hr class="divider">
+
+      <div class="columns">
+        <div class="col-left">
+          <p class="eyebrow">CG CREATIVE STUDIO</p>
+          <h1 class="headline">We're giving the site<br>a little makeover.</h1>
+        </div>
+
+        <div class="col-right">
+          <p class="subtext">Come back later for our big reveal.<br>We promise, it'll be worth it.</p>
+
+          <div class="contact">
+            <p class="contact-label">In the meantime, reach us at:</p>
+
+            <div class="contact-row">
+              <!-- Placeholder for the PNG badge -->
+              <div class="ph ph-badge">
+                <img src="assets/badge.png" alt="" class="ph-img" onerror="this.style.display='none'; this.parentElement.classList.add('ph-empty')">
+                <span class="ph-label">PNG</span>
+              </div>
+
+              <a
+                class="fb-link"
+                href="https://www.facebook.com/profile.php?id=100068037551099"
+                target="_blank"
+                rel="noopener nofollow"
+              >
+                <svg class="fb-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z"/>
+                </svg>
+                C&amp;G Online Shop on Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> CG Creative Studio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback — CG Creative Studio</title>
+  <meta name="description" content="Tell CG Creative Studio how your project or order went.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-shell {
+      max-width: 640px;
+      background: var(--paper);
+      border: 1px solid var(--border-dark);
+      padding: clamp(24px, 5vw, 40px);
+      clip-path: polygon(0 0, 100% 0, 100% 94%, 94% 100%, 0 100%);
+      position: relative;
+    }
+    .form-shell::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 16px;
+      height: 16px;
+      background: var(--coral);
+    }
+    .field {
+      margin-bottom: 22px;
+    }
+    .field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 15px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border-dark);
+      background: #fff;
+      color: var(--ink);
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+    .field textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .rating-group {
+      display: flex;
+      gap: 8px;
+    }
+    .rating-group input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+    .rating-group label {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border: 1.5px solid var(--border-dark);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      margin: 0;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .rating-group input:checked + label {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+    .rating-group input:focus-visible + label {
+      outline: 3px solid var(--yellow);
+      outline-offset: 2px;
+    }
+    #form-status {
+      margin-top: 18px;
+      font-size: 14px;
+      font-weight: 600;
+      display: none;
+    }
+    #form-status.is-success {
+      display: block;
+      color: #0a6b3d;
+    }
+    #form-status.is-error {
+      display: block;
+      color: #a4243b;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span>CG Creative Studio</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="printing.html">Printing</a></li>
+        <li><a href="feedback.html" aria-current="page">Feedback</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="printing.html#order" class="nav-cta">Order Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="band band-paper">
+      <div class="wrap">
+        <div class="section-head" style="max-width: 620px;">
+          <h2 style="font-size: clamp(30px, 4vw, 44px);">How did we do?</h2>
+          <p>Whether it was a print order or an IT project, your feedback helps us improve.</p>
+        </div>
+
+        <form id="feedback-form" class="form-shell" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="service">Which service was this about?</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Computer Repair & Tech Support">Computer Repair &amp; Tech Support</option>
+              <option value="Graphic Design">Graphic Design</option>
+              <option value="Software Installs & Subscriptions">Software Installs &amp; Subscriptions</option>
+              <option value="Printing (Shirts, Tarpaulins, etc.)">Printing (Shirts, Tarpaulins, etc.)</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label id="rating-label">How would you rate it?</label>
+            <div class="rating-group" role="radiogroup" aria-labelledby="rating-label">
+              <input type="radio" id="r1" name="rating" value="1" required>
+              <label for="r1">1</label>
+              <input type="radio" id="r2" name="rating" value="2">
+              <label for="r2">2</label>
+              <input type="radio" id="r3" name="rating" value="3">
+              <label for="r3">3</label>
+              <input type="radio" id="r4" name="rating" value="4">
+              <label for="r4">4</label>
+              <input type="radio" id="r5" name="rating" value="5">
+              <label for="r5">5</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Your feedback</label>
+            <textarea id="message" name="message" required placeholder="What went well? What could be better?"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">Send feedback</button>
+
+          <p id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4>CG Creative Studio</h4>
+          <p>IT services and custom printing under one roof — web development, tech support, graphic design, and print production for shirts, tarpaulins, and more.</p>
+          <p>Sibul, Central Luzon, Philippines</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="printing.html">Printing</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="mailto:hello@cgcreativestudio.example">hello@cgcreativestudio.example</a></li>
+            <li><a href="tel:+639000000000">+63 900 000 0000</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=100068037551099" target="_blank" rel="noopener nofollow">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> CG Creative Studio. All rights reserved.</p>
+        <p>Placeholder contact details — update with your real info.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="feedback.js"></script>
+</body>
+</html>

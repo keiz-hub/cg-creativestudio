@@ -35,6 +35,37 @@ in your real info before launch:
   deployment URL (see setup below)
 - **Service descriptions:** all copy on `services.html` and `index.html`
   is a reasonable draft — edit to match your actual offerings
+- **About blurb:** the "About the studio" paragraph on `index.html` is a
+  draft — edit to reflect your actual story
+
+## Adding real images
+
+Six spots currently show dashed placeholder boxes. Drop a real file
+into an `assets/` folder (next to `index.html`) with the exact filename
+below, and it replaces the placeholder automatically — no code changes
+needed:
+
+| Placeholder            | Expected file                      | Suggested shape |
+|--------------------------|-------------------------------------|-------------------|
+| Homepage hero            | `assets/hero-banner.jpg`           | landscape (4:3)   |
+| About section            | `assets/about-photo.jpg`           | portrait (4:5)    |
+| Printing — Shirts        | `assets/print-shirts.jpg`          | landscape (4:3)   |
+| Printing — Tarpaulins    | `assets/print-tarpaulins.jpg`      | landscape (4:3)   |
+| Printing — Stickers      | `assets/print-stickers.jpg`        | landscape (4:3)   |
+| Printing — Other prints  | `assets/print-other.jpg`           | landscape (4:3)   |
+
+The hero placeholder also works with a GIF instead of a photo — just
+rename the `<img src="assets/hero-banner.jpg">` in `index.html` to
+`assets/hero-banner.gif` and save your file with that name. Browsers
+play animated GIFs normally inside a regular `<img>` tag, no extra code
+needed.
+
+Tips for the photos themselves:
+- Keep a consistent lighting/background style across the 4 print photos
+  so the catalog feels cohesive.
+- Square-ish product shots work best — the placeholder boxes crop to
+  a 4:3 frame automatically (`object-fit: cover`), so an off-ratio
+  photo will get cropped, not squished.
 
 ---
 
@@ -95,6 +126,12 @@ check the deployment is still set to "Anyone" access and the URL in
 `feedback.js` matches your current deployment (redeploying can generate
 a new URL unless you deploy as "New version" instead of a fresh
 deployment).
+
+**Note on the timestamp:** the "Submitted At" column is generated on
+Google's servers (not the visitor's browser) and formatted specifically
+in Philippine time (`Asia/Manila`), so it stays consistent no matter
+where someone is browsing from. If you ever change the timezone, edit
+the `'Asia/Manila'` argument in `Code.gs` and redeploy.
 
 ---
 

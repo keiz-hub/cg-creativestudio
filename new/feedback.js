@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       service: data.get('service'),
       rating: data.get('rating'),
       message: data.get('message'),
+      submittedAt: new Date().toISOString(),
     };
 
     submitBtn.disabled = true;

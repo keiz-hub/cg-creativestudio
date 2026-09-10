@@ -108,11 +108,10 @@ select:focus-visible {
 }
 
 .brand-mark {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
-  background: linear-gradient(135deg, var(--blue) 0%, var(--yellow) 50%, var(--coral) 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 22%, 22% 0);
+  object-fit: contain;
 }
 
 .nav-links {

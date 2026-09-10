@@ -132,55 +132,62 @@
           <p>Whether it was a print order or an IT project, your feedback helps us improve.</p>
         </div>
 
-        <form id="feedback-form" class="form-shell" novalidate>
-          <div class="field">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required autocomplete="name">
-          </div>
-
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required autocomplete="email">
-          </div>
-
-          <div class="field">
-            <label for="service">Which service was this about?</label>
-            <select id="service" name="service" required>
-              <option value="" disabled selected>Select one</option>
-              <option value="Web Development">Web Development</option>
-              <option value="Computer Repair & Tech Support">Computer Repair &amp; Tech Support</option>
-              <option value="Graphic Design">Graphic Design</option>
-              <option value="Software Installs & Subscriptions">Software Installs &amp; Subscriptions</option>
-              <option value="Printing (Shirts, Tarpaulins, etc.)">Printing (Shirts, Tarpaulins, etc.)</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label id="rating-label">How would you rate it?</label>
-            <div class="rating-group" role="radiogroup" aria-labelledby="rating-label">
-              <input type="radio" id="r1" name="rating" value="1" required>
-              <label for="r1">1</label>
-              <input type="radio" id="r2" name="rating" value="2">
-              <label for="r2">2</label>
-              <input type="radio" id="r3" name="rating" value="3">
-              <label for="r3">3</label>
-              <input type="radio" id="r4" name="rating" value="4">
-              <label for="r4">4</label>
-              <input type="radio" id="r5" name="rating" value="5">
-              <label for="r5">5</label>
+        <div class="hero-grid" style="align-items: start;">
+          <form id="feedback-form" class="form-shell" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required autocomplete="name">
             </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+
+            <div class="field">
+              <label for="service">Which service was this about?</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Computer Repair & Tech Support">Computer Repair &amp; Tech Support</option>
+                <option value="Graphic Design">Graphic Design</option>
+                <option value="Software Installs & Subscriptions">Software Installs &amp; Subscriptions</option>
+                <option value="Printing (Shirts, Tarpaulins, etc.)">Printing (Shirts, Tarpaulins, etc.)</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label id="rating-label">How would you rate it?</label>
+              <div class="rating-group" role="radiogroup" aria-labelledby="rating-label">
+                <input type="radio" id="r1" name="rating" value="1" required>
+                <label for="r1">1</label>
+                <input type="radio" id="r2" name="rating" value="2">
+                <label for="r2">2</label>
+                <input type="radio" id="r3" name="rating" value="3">
+                <label for="r3">3</label>
+                <input type="radio" id="r4" name="rating" value="4">
+                <label for="r4">4</label>
+                <input type="radio" id="r5" name="rating" value="5">
+                <label for="r5">5</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Your feedback</label>
+              <textarea id="message" name="message" required placeholder="What went well? What could be better?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submit-btn">Send feedback</button>
+
+            <p id="form-status" role="status"></p>
+          </form>
+
+          <div class="img-ph img-ph-hero">
+            <img src="assets/feedback-photo.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('img-empty')">
+            <span class="img-ph-label">Photo or graphic<br><small>assets/feedback-photo.jpg</small></span>
           </div>
-
-          <div class="field">
-            <label for="message">Your feedback</label>
-            <textarea id="message" name="message" required placeholder="What went well? What could be better?"></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary" id="submit-btn">Send feedback</button>
-
-          <p id="form-status" role="status"></p>
-        </form>
+        </div>
       </div>
     </section>
   </main>

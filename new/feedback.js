@@ -6,7 +6,7 @@
 // URL. See /apps-script/Code.gs and README.md for the full setup steps.
 // ---------------------------------------------------------------------
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzm930jJQfxxyuPJPCPyI2bPxNQ4LW4MV_Eyc4IxxkmNHZkomlivIeLlT6A7MIU7h6_GQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/REPLACE-WITH-YOUR-DEPLOYMENT-ID/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('feedback-form');
@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
       service: data.get('service'),
       rating: data.get('rating'),
       message: data.get('message'),
-      submittedAt: new Date().toISOString(),
     };
 
     submitBtn.disabled = true;

@@ -125,6 +125,7 @@ select:focus-visible {
 }
 
 .nav-links a {
+  display: block;
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
@@ -170,7 +171,9 @@ select:focus-visible {
 
 @media (max-width: 860px) {
   .nav-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-links {
@@ -182,8 +185,9 @@ select:focus-visible {
     align-items: stretch;
     background: var(--ink);
     border-bottom: 1px solid var(--border-light);
-    padding: 12px clamp(20px, 5vw, 48px) 20px;
-    gap: 4px;
+    box-shadow: 0 16px 24px -12px rgba(0, 0, 0, 0.35);
+    padding: 8px clamp(20px, 5vw, 48px) 24px;
+    gap: 0;
     display: none;
   }
 
@@ -192,15 +196,22 @@ select:focus-visible {
   }
 
   .nav-links a {
-    padding: 10px 4px;
+    padding: 16px 6px;
+    font-size: 16px;
     border-bottom: 1px solid var(--border-light);
-    border-radius: 0;
+  }
+
+  .nav-links a:hover,
+  .nav-links a[aria-current="page"] {
+    background: rgba(247, 242, 233, 0.06);
+    border-bottom-color: var(--yellow);
   }
 
   .nav-cta {
-    margin-top: 8px;
+    margin-top: 16px;
     text-align: center;
     border-bottom: none !important;
+    padding: 14px 18px !important;
   }
 }
 
@@ -218,6 +229,53 @@ select:focus-visible {
 .band-ink {
   background: var(--ink);
   color: var(--paper);
+}
+
+/* Band with a low-opacity background photo behind the content — swap
+   the image via the --band-bg-image custom property on the section
+   element, e.g. style="--band-bg-image: url('assets/it-services-bg.jpg')".
+   If the file doesn't exist yet, this degrades to the plain band color
+   with no broken-image marker. */
+.band-photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.band-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--band-bg-image, none);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.16;
+  z-index: 0;
+}
+
+.band-photo > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Embedded map (Contact page) ---------- */
+/* Uses an explicit clamp() height instead of aspect-ratio — combining
+   aspect-ratio with min-height on a block box containing a
+   percentage-sized iframe triggers a width miscalculation in Chromium
+   at narrow viewports (the box was measured rendering ~2x wider than
+   its container on a 390px-wide screen). A plain height avoids the
+   whole interaction. */
+.map-frame {
+  width: 100%;
+  max-width: 100%;
+  height: clamp(220px, 42vw, 420px);
+  overflow: hidden;
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .band-ink .section-kicker {
@@ -328,9 +386,11 @@ h1, h2, h3, h4 {
 
 .card {
   position: relative;
+  min-width: 0;
   border: 1px solid var(--border-dark);
   padding: 28px;
   background: var(--paper);
+  overflow-wrap: break-word;
   clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%);
 }
 
@@ -342,6 +402,7 @@ h1, h2, h3, h4 {
   width: 14px;
   height: 14px;
   background: var(--coral);
+  z-index: 2;
 }
 
 .band-ink .card {
@@ -351,6 +412,25 @@ h1, h2, h3, h4 {
 
 .band-ink .card::after {
   background: var(--yellow);
+}
+
+/* Card variant with a photo on top (used on the printing page) */
+.card.has-media {
+  padding: 0;
+  overflow: hidden;
+}
+
+.card.has-media .card-media {
+  aspect-ratio: 4 / 3;
+  background: rgba(7, 26, 61, 0.035);
+}
+
+.band-ink .card.has-media .card-media {
+  background: rgba(247, 242, 233, 0.05);
+}
+
+.card.has-media .card-body {
+  padding: 22px 24px 26px;
 }
 
 .card-code {
@@ -381,11 +461,215 @@ h1, h2, h3, h4 {
   color: var(--ink-soft);
 }
 
+/* ---------- Image placeholders ---------- */
+/* Clean, borderless slots for photos/icons/GIFs not added yet — just a
+   muted label so you can see what goes where. Drop a real file at the
+   referenced path (e.g. assets/hero-banner.jpg) and it replaces the
+   label automatically — see the onerror handler on each <img>. Works
+   fine with transparent-background PNGs/icons since there's no frame
+   competing with them. */
+
+.img-ph {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: rgba(7, 26, 61, 0.45);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.band-ink .img-ph {
+  color: rgba(247, 242, 233, 0.5);
+}
+
+.img-ph small {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82em;
+  opacity: 0.8;
+}
+
+.img-ph img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-ph:not(.img-empty) .img-ph-label {
+  display: none;
+}
+
+.img-ph-hero {
+  aspect-ratio: 4 / 3;
+}
+
+.img-ph-about {
+  aspect-ratio: 4 / 5;
+}
+
+.img-ph-product {
+  aspect-ratio: 4 / 3;
+}
+
+/* ---------- Gallery / lightbox (printing page sample photos) ---------- */
+
+.media-frame {
+  position: relative;
+  cursor: pointer;
+}
+
+.media-frame .expand-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 26, 61, 0.78);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  transition: background 0.15s ease;
+}
+
+.media-frame .expand-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.media-frame:hover .expand-btn,
+.media-frame:focus-within .expand-btn {
+  background: var(--blue);
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 26, 61, 0.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: clamp(20px, 6vw, 48px);
+}
+
+.lightbox-overlay.is-open {
+  display: flex;
+}
+
+.lightbox-inner {
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+}
+
+.lightbox-stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: rgba(247, 242, 233, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lightbox-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lightbox-stage .img-ph {
+  position: absolute;
+  inset: 0;
+  color: rgba(247, 242, 233, 0.55);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--paper);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(247, 242, 233, 0.1);
+  border: none;
+  color: var(--paper);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.lightbox-nav:hover {
+  background: rgba(247, 242, 233, 0.2);
+}
+
+.lightbox-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lightbox-prev {
+  left: -58px;
+}
+
+.lightbox-next {
+  right: -58px;
+}
+
+.lightbox-counter {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+  margin-top: 16px;
+}
+
+@media (max-width: 760px) {
+  .lightbox-prev {
+    left: 8px;
+  }
+  .lightbox-next {
+    right: 8px;
+  }
+}
+
 /* ---------- Grids ---------- */
 
 .grid {
   display: grid;
   gap: 24px;
+}
+
+/* Grid items default to min-width:auto, which lets long unbreakable
+   content (like an email address) force the track wider than its
+   container. This keeps every grid item shrinkable to its track. */
+.grid > * {
+  min-width: 0;
 }
 
 .grid-2 {
@@ -430,6 +714,29 @@ h1, h2, h3, h4 {
   height: 40px;
   flex-shrink: 0;
   border: 1px solid var(--border-dark);
+}
+
+/* ---------- Hero / About layouts with images ---------- */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .hero-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- Footer ---------- */

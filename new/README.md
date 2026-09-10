@@ -35,6 +35,95 @@ in your real info before launch:
   deployment URL (see setup below)
 - **Service descriptions:** all copy on `services.html` and `index.html`
   is a reasonable draft — edit to match your actual offerings
+- **About blurb:** the "About the studio" paragraph on `index.html` is a
+  draft — edit to reflect your actual story
+
+## Adding real images
+
+The placeholders are now borderless — just a small muted label — so a
+transparent-background icon or logo will sit cleanly with nothing
+framing it. Drop a real file into an `assets/` folder (next to
+`index.html`) with the exact filename below, and it replaces the label
+automatically — no code changes needed:
+
+| Placeholder              | Expected file                 | Suggested shape |
+|---------------------------|---------------------------------|-------------------|
+| Homepage hero             | `assets/hero-banner.jpg`       | landscape (4:3)   |
+| About section             | `assets/about-photo.jpg`       | portrait (4:5)    |
+| Feedback page             | `assets/feedback-photo.jpg`    | landscape (4:3)   |
+| IT Services background    | `assets/it-services-bg.jpg`    | landscape, wide   |
+| Printing — Shirts         | `assets/print-shirts-1.jpg` (+`-2`, `-3`) | landscape (4:3) |
+| Printing — Tarpaulins     | `assets/print-tarpaulins-1.jpg` (+`-2`, `-3`) | landscape (4:3) |
+| Printing — Stickers       | `assets/print-stickers-1.jpg` (+`-2`, `-3`) | landscape (4:3) |
+| Printing — Other prints   | `assets/print-other-1.jpg` (+`-2`, `-3`) | landscape (4:3) |
+
+The hero placeholder also works with a GIF instead of a photo — just
+rename the `<img src="assets/hero-banner.jpg">` in `index.html` to
+`assets/hero-banner.gif` and save your file with that name. Browsers
+play animated GIFs normally inside a regular `<img>` tag, no extra code
+needed.
+
+Tips for the photos themselves:
+- Keep a consistent lighting/background style across the print photos
+  so the catalog feels cohesive.
+- Square-ish product shots work best — the placeholder boxes crop to
+  a 4:3 frame automatically (`object-fit: cover`), so an off-ratio
+  photo will get cropped, not squished.
+
+### Printing page: sample photo carousel
+
+Each printing card now opens a full-size carousel (click the photo or
+the corner button) so you can show multiple sample photos per product
+instead of just one. By default each category expects 3 samples
+(`-1.jpg`, `-2.jpg`, `-3.jpg`) — any that don't exist yet just show a
+"not added" label inside the carousel instead of breaking.
+
+To add more than 3 samples for a category, open `printing.js` and add
+more filenames to that category's array, e.g.:
+
+```js
+shirts: [
+  'assets/print-shirts-1.jpg',
+  'assets/print-shirts-2.jpg',
+  'assets/print-shirts-3.jpg',
+  'assets/print-shirts-4.jpg',   // just add more lines like this
+],
+```
+
+### IT Services background image
+
+The "IT services" section (on both the homepage and the Services page)
+now supports a background photo shown at low opacity behind the
+content, instead of a flat color. It's controlled by one line in the
+HTML:
+
+```html
+<section class="band band-ink band-photo" style="--band-bg-image: url('assets/it-services-bg.jpg');">
+```
+
+Drop a file at `assets/it-services-bg.jpg` and it'll show through
+faintly behind the text (about 16% opacity, so text stays readable). No
+file there yet? It just falls back to the plain navy background — no
+broken-image icon. Want it more or less visible? Open `style.css`,
+find `.band-photo::before`, and adjust the `opacity` value (currently
+`0.16`).
+
+---
+
+## Setting up the embedded map (Contact page)
+
+`contact.html` currently embeds a placeholder map (just centered on
+"Philippines" generally). To point it at your real location:
+
+1. Open [Google Maps](https://maps.google.com) and search your actual
+   business address.
+2. Click **Share** → **Embed a map** → copy the `<iframe>` code it
+   gives you.
+3. In `contact.html`, find the `<iframe src="https://www.google.com/maps?q=Philippines&output=embed" ...>` block and replace the whole
+   `<iframe>` with the one you copied (or just swap the `src` value —
+   either works).
+
+No API key needed for a basic embedded map like this.
 
 ---
 
@@ -95,6 +184,12 @@ check the deployment is still set to "Anyone" access and the URL in
 `feedback.js` matches your current deployment (redeploying can generate
 a new URL unless you deploy as "New version" instead of a fresh
 deployment).
+
+**Note on the timestamp:** the "Submitted At" column is generated on
+Google's servers (not the visitor's browser) and formatted specifically
+in Philippine time (`Asia/Manila`), so it stays consistent no matter
+where someone is browsing from. If you ever change the timezone, edit
+the `'Asia/Manila'` argument in `Code.gs` and redeploy.
 
 ---
 
